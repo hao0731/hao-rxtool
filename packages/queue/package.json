@@ -1,0 +1,27 @@
+{
+  "name": "@hao-rxtool/queue",
+  "version": "1.0.0",
+  "description": "A powerful RxJS-based queue and queue manager for efficient and asynchronous task processing.",
+  "license": "MIT",
+  "author": "HAO <ss501801@gmail.com>",
+  "contributors": [
+    {
+      "name": "HAO",
+      "email": "ss501801@gmail.com"
+    }
+  ],
+  "keywords": [
+    "RxJS",
+    "Stream",
+    "Observable",
+    "Observables",
+    "Queue"
+  ],
+  "dependencies": {
+    "rxjs": "^6.6.7",
+    "tslib": "^2.3.0"
+  },
+  "type": "commonjs",
+  "main": "./index.cjs",
+  "module": "./index.js"
+}
