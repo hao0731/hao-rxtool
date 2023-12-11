@@ -54,7 +54,7 @@ export class StreamQueue<T = unknown> {
         .pipe(
           filter((streamItem) => streamItem.index === index),
           map(({ item }) => item),
-          take(1),
+          take(1)
         )
         .subscribe(subscriber);
       this.enqueueWithIndex(item, index);
@@ -75,7 +75,7 @@ export class StreamQueue<T = unknown> {
 
   private registerProcessor() {
     const destroy$ = this._statusChange$.pipe(
-      filter((status) => status === StreamQueueStatus.DESTROY),
+      filter((status) => status === StreamQueueStatus.DESTROY)
     );
 
     this._queue$
@@ -85,16 +85,20 @@ export class StreamQueue<T = unknown> {
         }),
         concatMap((item) => {
           return new Observable<StreamQueueItem<T>>((subscriber) => {
-            of(item).pipe(delayWhen(() => this._dequeue$)).subscribe(subscriber);
+            of(item)
+              .pipe(delayWhen(() => this._dequeue$))
+              .subscribe(subscriber);
             this._whenReadyToDequeue$.next(item);
           });
         }),
-        takeUntil(destroy$),
+        takeUntil(destroy$)
       )
       .subscribe({
         next: (item) => {
           const status =
-            this._latestIndex === item.index ? StreamQueueStatus.EMPTY : StreamQueueStatus.PENDING;
+            this._latestIndex === item.index
+              ? StreamQueueStatus.EMPTY
+              : StreamQueueStatus.PENDING;
           this._statusChange$.next(status);
           this._whenDequeued$.next(item);
         },
