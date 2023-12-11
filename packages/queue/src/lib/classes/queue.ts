@@ -16,7 +16,8 @@ import { StreamQueueStatus } from '../enums';
 export class StreamQueue<T = unknown> {
   private readonly _queue$ = new ReplaySubject<StreamQueueItem<T>>();
   private readonly _dequeue$ = new Subject<void>();
-  private readonly _dequeueStream$ = new Subject<StreamQueueItem<T>>();
+  private readonly _whenDequeued$ = new Subject<StreamQueueItem<T>>();
+  private readonly _whenReadyToDequeue$ = new Subject<StreamQueueItem<T>>();
   private readonly _statusChange$ = new Subject<StreamQueueStatus>();
 
   private _latestIndex = -1;
@@ -25,8 +26,12 @@ export class StreamQueue<T = unknown> {
     this.registerProcessor();
   }
 
-  get dequeueStream() {
-    return this._dequeueStream$.pipe(map(({ item }) => item));
+  get whenReadyToDequeue() {
+    return this._whenReadyToDequeue$.pipe(map(({ item }) => item));
+  }
+
+  get whenDequeued() {
+    return this._whenDequeued$.pipe(map(({ item }) => item));
   }
 
   get statusChange() {
@@ -45,7 +50,7 @@ export class StreamQueue<T = unknown> {
   enqueueAndWaitDequeue(item: T) {
     const index = ++this._latestIndex;
     return new Observable<T>((subscriber) => {
-      this._dequeueStream$
+      this._whenDequeued$
         .pipe(
           filter((streamItem) => streamItem.index === index),
           map(({ item }) => item),
@@ -60,7 +65,8 @@ export class StreamQueue<T = unknown> {
     this._statusChange$.next(StreamQueueStatus.DESTROY);
     this._statusChange$.complete();
     this._dequeue$.complete();
-    this._dequeueStream$.complete();
+    this._whenDequeued$.complete();
+    this._whenReadyToDequeue$.complete();
   }
 
   private enqueueWithIndex(item: T, index: number) {
@@ -77,7 +83,12 @@ export class StreamQueue<T = unknown> {
         tap(() => {
           this._statusChange$.next(StreamQueueStatus.PENDING);
         }),
-        concatMap((item) => of(item).pipe(delayWhen(() => this._dequeue$))),
+        concatMap((item) => {
+          return new Observable<StreamQueueItem<T>>((subscriber) => {
+            of(item).pipe(delayWhen(() => this._dequeue$)).subscribe(subscriber);
+            this._whenReadyToDequeue$.next(item);
+          });
+        }),
         takeUntil(destroy$),
       )
       .subscribe({
@@ -85,7 +96,7 @@ export class StreamQueue<T = unknown> {
           const status =
             this._latestIndex === item.index ? StreamQueueStatus.EMPTY : StreamQueueStatus.PENDING;
           this._statusChange$.next(status);
-          this._dequeueStream$.next(item);
+          this._whenDequeued$.next(item);
         },
       });
   }

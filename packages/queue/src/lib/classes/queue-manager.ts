@@ -7,7 +7,7 @@ export class StreamQueueManager {
   constructor(private readonly _options?: StreamQueueManagerOption) {}
 
   private get _maxPoolSize() {
-    return this._options?.poolSize ?? 10;
+    return this._options?.poolSize ?? Infinity;
   }
 
   set<T>(name: StreamQueueName) {
@@ -56,12 +56,17 @@ export class StreamQueueManager {
     });
   }
 
-  getDequeueStream<T>(name: StreamQueueName) {
+  whenReadyToDequeue<T>(name: StreamQueueName) {
     const queue = this.getOrSetQueue<T>(name);
-    return queue.dequeueStream;
+    return queue.whenReadyToDequeue;
   }
 
-  getStatusChange(name: StreamQueueName) {
+  whenDequeued<T>(name: StreamQueueName) {
+    const queue = this.getOrSetQueue<T>(name);
+    return queue.whenDequeued;
+  }
+
+  statusChange(name: StreamQueueName) {
     const queue = this.getOrSetQueue(name);
     return queue.statusChange;
   }
