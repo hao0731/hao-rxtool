@@ -77,16 +77,12 @@ export class StreamQueue<T = unknown> {
    */
   enqueueAndWaitDequeue(item: T) {
     const index = ++this._latestIndex;
-    return new Observable<T>((subscriber) => {
-      this._whenDequeued$
-        .pipe(
-          filter((streamItem) => streamItem.index === index),
-          map(({ item }) => item),
-          take(1)
-        )
-        .subscribe(subscriber);
-      this.enqueueWithIndex(item, index);
-    });
+    this.enqueueWithIndex(item, index);
+    return this._whenDequeued$.pipe(
+      filter((streamItem) => streamItem.index === index),
+      map(({ item }) => item),
+      take(1)
+    );
   }
 
   /**
