@@ -1,3 +1,4 @@
+import { ExistQueueError, MaximumQueuePoolSizeError } from '../errors';
 import { StreamQueueManagerOption, StreamQueueName } from '../interfaces';
 import { StreamQueue } from './queue';
 
@@ -26,11 +27,11 @@ export class StreamQueueManager {
    */
   set<T>(name: StreamQueueName) {
     if (this._queuePool.has(name)) {
-      throw new Error(`The queue ${name} already exists.`);
+      throw new ExistQueueError(name);
     }
 
     if (this._queuePool.size >= this._maxPoolSize) {
-      throw new Error(`The queue pool has reached its maximum size.`);
+      throw new MaximumQueuePoolSizeError(this._maxPoolSize);
     }
 
     const queue = new StreamQueue<T>();
