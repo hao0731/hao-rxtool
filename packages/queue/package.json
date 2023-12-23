@@ -17,6 +17,15 @@
     "Observables",
     "Queue"
   ],
+  "homepage": "https://github.com/hao0731/hao-rxtool",
+  "bugs": {
+    "url": "https://github.com/hao0731/hao-rxtool/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hao0731/hao-rxtool.git",
+    "directory": "packages/queue"
+  },
   "dependencies": {
     "tslib": "^2.3.0",
     "rxjs": "^7.8.1"

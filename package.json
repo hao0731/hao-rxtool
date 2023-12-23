@@ -18,6 +18,14 @@
     "Observable",
     "Observables"
   ],
+  "homepage": "https://github.com/hao0731/hao-rxtool",
+  "bugs": {
+    "url": "https://github.com/hao0731/hao-rxtool/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hao0731/hao-rxtool.git"
+  },
   "dependencies": {
     "@swc/helpers": "~0.5.2",
     "rxjs": "^7.8.1",
