@@ -9,7 +9,7 @@ The library is built on top of [RxJS](https://rxjs.dev/), a powerful library for
 Install the library using npm:
 
 ```bash
-npm install @hao-rxtool/queue
+npm install rxjs @hao-rxtool/queue
 ```
 
 ## StreamQueue
