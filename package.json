@@ -1,7 +1,7 @@
 {
   "name": "@hao-rxtool/source",
   "description": "A powerful RxJS-based toolkit.",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "license": "MIT",
   "scripts": {},
   "private": true,
