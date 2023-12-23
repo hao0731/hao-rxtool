@@ -28,19 +28,32 @@ import { StreamQueue, StreamQueueStatus } from '@hao-rxtool/queue';
 // Create a new stream queue
 const queue = new StreamQueue<number>();
 
-// Listen for status changes
+// Listen for the status of the queue changes
 queue.statusChange.subscribe((status) => {
-  console.log(`Queue status: ${StreamQueueStatus[status]}`);
+  console.log(`Queue status: ${status}`); // StreamQueueStatus
 });
 
+// Listen for an item is ready to be dequeued
+queue.whenReadyToDequeue.subscribe((item) => {
+  console.log(`When ready to dequeue item: ${item}`);
+});
+
+// Listen for an item has been dequeued
 queue.whenDequeued.subscribe((item) => {
   console.log(`Dequeued item: ${item}`);
 });
 
 // Enqueue an item
-queue.enqueue(42);
+queue.enqueue(1);
 
 // Dequeue an item
+queue.dequeue();
+
+// Enqueues an item and waits for it to be dequeued
+queue.enqueueAndWaitDequeue(2).subscribe((item) => {
+  console.log(`Enqueue and wait dequeue item: ${item}`);
+});
+
 queue.dequeue();
 
 // Destroy the queue when no longer needed
@@ -66,18 +79,29 @@ const manager = new StreamQueueManager(options);
 const queueName = 'exampleQueue';
 // Listen for status changes of a specific queue
 manager.statusChange(queueName).subscribe((status) => {
-  console.log(`Queue ${queueName} status: ${StreamQueueStatus[status]}`);
+  console.log(`Queue status: ${status}`);
 });
 
+// Listen for an item is ready to be dequeued of a specific queue
+manager.whenReadyToDequeue(queueName).subscribe((item) => {
+  console.log(`When ready to dequeue item: ${item}`);
+});
+
+// Listen for an item has been dequeued of a specific queue
 manager.whenDequeued(queueName).subscribe((item) => {
   console.log(`Dequeued item: ${item}`);
 });
 
-// Enqueue an item from a queue
-manager.enqueue(queueName, 42);
+// Enqueue an item to the specific queue
+manager.enqueue(queueName, 1);
 
 // Dequeue an item from a queue
 manager.dequeue(queueName);
+
+// Enqueues an item to the specific queue and waits for it to be dequeued
+manager.enqueueAndWaitDequeue(queueName, 2).subscribe((item) => {
+  console.log(`Enqueue and wait dequeue item: ${item}`);
+});
 
 // Clear all queues from the manager
 manager.clear();
