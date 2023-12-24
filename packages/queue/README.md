@@ -1,5 +1,8 @@
 # @hao-rxtool/queue
 
+![Node.js CI](https://github.com/hao0731/hao-rxtool/actions/workflows/node.js.yml/badge.svg)
+![NPM version](https://img.shields.io/npm/v/@hao-rxtool/queue.svg?style=flat)
+
 This library provides a flexible and easy-to-use stream queue implementation for managing asynchronous tasks.
 
 The library is built on top of [RxJS](https://rxjs.dev/), a powerful library for reactive programming.

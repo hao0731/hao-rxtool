@@ -1,5 +1,7 @@
 # @hao-rxtool
 
+![Node.js CI](https://github.com/hao0731/hao-rxtool/actions/workflows/node.js.yml/badge.svg)
+
 `@hao-rxtool` is a toolkit that includes various packages based on RxJS.
 
 ## Packages
