@@ -8,7 +8,7 @@
  */
 
 import { execSync } from 'child_process';
-import { readFileSync, writeFileSync } from 'fs';
+import { readFileSync, writeFileSync, copyFileSync } from 'fs';
 
 import devkit from '@nx/devkit';
 const { readCachedProjectGraph } = devkit;
@@ -39,11 +39,24 @@ invariant(
   `Could not find project "${name}" in the workspace. Is the project.json configured correctly?`
 );
 
+const rootPath = project.data?.root;
+invariant(
+  rootPath,
+  `Could not find "root" of project "${name}".`
+);
+
 const outputPath = project.data?.targets?.build?.options?.outputPath;
 invariant(
   outputPath,
   `Could not find "build.options.outputPath" of project "${name}". Is project.json configured  correctly?`
 );
+
+// Copying the README.md before publishing
+try {
+  copyFileSync(`${rootPath}/README.md`, `${outputPath}/README.md`);
+} catch (e) {
+  invariant(false, `Error copying README.md file.`);
+}
 
 process.chdir(outputPath);
 
