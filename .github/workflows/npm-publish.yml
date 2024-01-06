@@ -28,13 +28,22 @@ jobs:
           node-version: 16
           registry-url: https://registry.npmjs.org/
 
+      # - name: Publish
+      #   run: |
+      #     npm ci
+      #     if ${{env.is_pre_release}}; then
+      #       npx nx run-many --target=publish --args="--ver=${{ env.git_tag }} --tag=next"
+      #     else
+      #       npx nx run-many --target=publish --args="--ver=${{ env.git_tag }} --tag=latest"
+      #     fi
+
       - name: Publish
         run: |
           npm ci
-          if [${{env.is_pre_release}}]; then
-            npx nx run-many --target=publish --args="--ver=${{ env.git_tag }} --tag=next"
+          if ${{env.is_pre_release}}; then
+            echo "pre release"
           else
-            npx nx run-many --target=publish --args="--ver=${{ env.git_tag }} --tag=latest"
+            echo "release"
           fi
     env:
       NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
