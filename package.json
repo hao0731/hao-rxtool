@@ -1,7 +1,7 @@
 {
   "name": "@hao-rxtool/source",
   "description": "A powerful RxJS-based toolkit.",
-  "version": "0.2.1-beta.1",
+  "version": "0.2.1",
   "license": "MIT",
   "scripts": {
     "prepare": "husky install",
