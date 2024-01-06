@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.1-beta.1 (2024-01-06)
+
+* **queue** set rxjs to external in order to avoid to bundle it. ([#5](https://github.com/hao0731/hao-rxtool/pull/5)) ([79a9f25d](https://github.com/hao0731/hao-rxtool/commit/79a9f25d9985e3d4e3f056607d416650443de48b))
+
 ## 0.2.0 (2024-01-06)
 
 
