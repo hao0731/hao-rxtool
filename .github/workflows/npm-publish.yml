@@ -9,7 +9,7 @@ on:
 
 jobs:
   test-job:
-    runs-on: github
+    runs-on: ubuntu-latest
     steps:
       - name: GitHub Tag Name
         run: |
