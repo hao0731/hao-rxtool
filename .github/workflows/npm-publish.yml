@@ -8,39 +8,38 @@ on:
     types: [created]
 
 jobs:
-  test-job:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: GitHub Tag Name
-        run: |
-          echo "Tag name from github.ref_name: ${{  github.ref_name }}"
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - run: npm ci
+      - run: npx nx run-many --target=test --parallel 3 --ci
 
-      - name: Is pre release
+  publish-npm:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          registry-url: https://registry.npmjs.org/
+
+      - name: Publish Latest
+        if: !env.is_pre_release
+        run: |
+          npm ci
+          npx nx run-many --target=publish --args="--ver=${{ env.git_tag }} --tag=latest"
+
+      - name: Publish Next
         if: env.is_pre_release
         run: |
-          echo "Is pre release: ${{ env.is_pre_release }}"
+          npm ci
+          npx nx run-many --target=publish --args="--ver=${{ env.git_tag }} --tag=next"
     env:
+      NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       is_pre_release: ${{ github.event.release.prerelease }}
-  # build:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v3
-  #     - uses: actions/setup-node@v3
-  #       with:
-  #         node-version: 16
-  #     - run: npm ci
-  #     - run: npx nx run-many --target=test --parallel 3 --ci
-
-  # publish-npm:
-  #   needs: build
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v3
-  #     - uses: actions/setup-node@v3
-  #       with:
-  #         node-version: 16
-  #         registry-url: https://registry.npmjs.org/
-  #     - run: npm ci
-  #     - run: npx nx run-many --target=publish --parallel 3
-  #       env:
-  #         NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+      git_tag: ${{ github.ref_name }}
