@@ -14,6 +14,13 @@ jobs:
       - name: GitHub Tag Name
         run: |
           echo "Tag name from github.ref_name: ${{  github.ref_name }}"
+
+      - name: Is pre release
+        if: env.is_pre_release
+        run: |
+          echo "Is pre release: ${{ env.is_pre_release }}"
+    env:
+      is_pre_release: ${{ github.event.release.prerelease }}
   # build:
   #   runs-on: ubuntu-latest
   #   steps:
