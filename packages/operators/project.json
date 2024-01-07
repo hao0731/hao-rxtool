@@ -1,0 +1,40 @@
+{
+  "name": "operators",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/operators/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/rollup:rollup",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/packages/operators",
+        "main": "packages/operators/src/index.ts",
+        "tsConfig": "packages/operators/tsconfig.lib.json",
+        "external": ["rxjs"],
+        "assets": [],
+        "project": "packages/operators/package.json",
+        "compiler": "swc",
+        "format": ["cjs", "esm"],
+        "generateExportsField": true,
+        "additionalEntryPoints": ["packages/operators/src/index.ts"]
+      }
+    },
+    "publish": {
+      "command": "node tools/scripts/publish.mjs operators {args.ver} {args.tag}",
+      "dependsOn": ["build"]
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"]
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "packages/operators/jest.config.ts"
+      }
+    }
+  },
+  "tags": []
+}
