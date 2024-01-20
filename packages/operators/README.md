@@ -24,6 +24,9 @@ npm install rxjs @hao-rxtool/operators
   * [toLowerCase](#stringtolowercase)
   * [toUpperCase](#stringtouppercase)
   * [trim](#stringtrim)
+* [Number](#number)
+  * [toFixed](#numbertofixed)
+  * [toString](#numbertostring)
 * [Array](#array)
   * [forEach](#arrayforeach)
   * [map](#arraymap)
@@ -33,6 +36,13 @@ npm install rxjs @hao-rxtool/operators
   * [findIndex](#arrayfindindex)
   * [every](#arrayevery)
   * [some](#arraysome)
+* [Math](#math)
+  * [abs](#mathabs)
+  * [ceil](#mathceil)
+  * [floor](#mathfloor)
+  * [pow](#mathpow)
+  * [sqrt](#mathsqrt)
+  * [round](#mathround)
 * [Utility](#utility)
   * [filterDefined](#filterdefined)
   * [filterNonNullable](#filternonnullable)
@@ -160,6 +170,38 @@ of(input).pipe(stringTrim()).subscribe((result) => {
 });
 ```
 
+### Number
+
+#### numberToFixed
+
+Converts a number to a string with the specified number of decimal places.
+
+```typescript
+import { of } from 'rxjs';
+import { numberToFixed } from '@hao-rxtool/operators';
+
+const input = 12345.6789;
+
+of(input).pipe(numberToFixed(2)).subscribe((value) => {
+  console.log(value); // Output: '12345.68'
+});
+```
+
+#### numberToString
+
+Converts a number to a string in the specified radix (base).
+
+```typescript
+import { of } from 'rxjs';
+import { numberToString } from '@hao-rxtool/operators';
+
+const input = 12345.6789;
+
+of(input).pipe(numberToString(8)).subscribe((value) => {
+  console.log(value); // Output: '30071.5334614374241'
+});
+```
+
 ### Array
 
 #### arrayForEach
@@ -279,6 +321,86 @@ const input = [1, 2, 3, 4, 5];
 
 of(input).pipe(arraySome((num) => num > 3)).subscribe((value) => {
   console.log(value); // Output: true
+});
+```
+
+### Math
+
+#### mathAbs
+
+Calculate the absolute value of a number.
+
+```typescript
+import { of, toArray } from 'rxjs';
+import { mathAbs } from '@hao-rxtool/operators';
+
+of(-1, 2).pipe(mathAbs(), toArray()).subscribe((value) => {
+  console.log(value); // Output: [1, 2]
+});
+```
+
+#### mathCeil
+
+Round a number up to the nearest integer.
+
+```typescript
+import { of, toArray } from 'rxjs';
+import { mathCeil } from '@hao-rxtool/operators';
+
+of(1.5, 2.7, -3.3).pipe(mathCeil(), toArray()).subscribe((value) => {
+  console.log(value); // Output: [2, 3, -3]
+});
+```
+
+#### mathFloor
+
+Round a number down to the nearest integer.
+
+```typescript
+import { of, toArray } from 'rxjs';
+import { mathFloor } from '@hao-rxtool/operators';
+
+of(1.5, 2.7, -3.3).pipe(mathFloor(), toArray()).subscribe((value) => {
+  console.log(value); // Output: [1, 2, -4]
+});
+```
+
+#### mathPow
+
+Calculate the power of a number.
+
+```typescript
+import { of, toArray } from 'rxjs';
+import { mathPow } from '@hao-rxtool/operators';
+
+of(2, 3, 4).pipe(mathPow(3), toArray()).subscribe((value) => {
+  console.log(value); // Output: [8, 27, 64]
+});
+```
+
+#### mathSqrt
+
+Calculate the square root of a number.
+
+```typescript
+import { of, toArray } from 'rxjs';
+import { mathSqrt } from '@hao-rxtool/operators';
+
+of(4, 9, 16).pipe(mathSqrt(), toArray()).subscribe((value) => {
+  console.log(value); // Output: [2, 3, 4]
+});
+```
+
+#### mathRound
+
+Round a number to the nearest integer.
+
+```typescript
+import { of, toArray } from 'rxjs';
+import { mathRound } from '@hao-rxtool/operators';
+
+of(1.3, 2.7, -3.5).pipe(mathRound(), toArray()).subscribe((value) => {
+  console.log(value); // Output: [1, 3, -3]
 });
 ```
 
