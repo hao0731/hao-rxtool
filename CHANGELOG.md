@@ -1,8 +1,13 @@
 # Changelog
 
+## 1.0.0-beta.1 (2024-01-21)
+
+* **queue:** update version and dependencies. ([#9](https://github.com/hao0731/hao-rxtool/pull/9)) ([6ae7c4ba](https://github.com/hao0731/hao-rxtool/commit/6ae7c4ba671c4226a3b244729cadd860b9193630))
+* **operators:** add operators library. ([#8](https://github.com/hao0731/hao-rxtool/pull/8)) ([3ba4aff5](https://github.com/hao0731/hao-rxtool/commit/3ba4aff5d546cbe1523e2e626b5dc187be5c557f))
+
 ## 0.2.1 (2024-01-07)
 
-* **queue** set rxjs to external in order to avoid to bundle it. ([#5](https://github.com/hao0731/hao-rxtool/pull/5)) ([79a9f25d](https://github.com/hao0731/hao-rxtool/commit/79a9f25d9985e3d4e3f056607d416650443de48b))
+* **queue:** set rxjs to external in order to avoid to bundle it. ([#5](https://github.com/hao0731/hao-rxtool/pull/5)) ([79a9f25d](https://github.com/hao0731/hao-rxtool/commit/79a9f25d9985e3d4e3f056607d416650443de48b))
 
 ## 0.2.0 (2024-01-06)
 
