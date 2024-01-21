@@ -9,7 +9,7 @@ import {
 } from './math';
 import { toArray } from 'rxjs/operators';
 
-describe('mathOperators', () => {
+describe('Math Operators', () => {
   describe('mathAbs', () => {
     it('should calculate the absolute value of numbers', (done) => {
       const input = of(-1, 2);
