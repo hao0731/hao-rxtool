@@ -1,6 +1,6 @@
 {
   "name": "@hao-rxtool/queue",
-  "version": "0.2.1",
+  "version": "1.0.0",
   "description": "A powerful RxJS-based queue and queue manager for efficient and asynchronous task processing.",
   "license": "MIT",
   "author": "HAO <ss501801@gmail.com>",
@@ -26,9 +26,7 @@
     "url": "https://github.com/hao0731/hao-rxtool.git",
     "directory": "packages/queue"
   },
-  "dependencies": {
-    "tslib": "^2.3.0"
-  },
+  "dependencies": {},
   "type": "commonjs",
   "main": "./index.cjs",
   "module": "./index.js"
