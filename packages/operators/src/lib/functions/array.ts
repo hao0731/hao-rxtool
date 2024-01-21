@@ -1,6 +1,5 @@
 import {
   OperatorFunction,
-  concatMap,
   defaultIfEmpty,
   every,
   filter,
@@ -8,7 +7,6 @@ import {
   findIndex,
   from,
   map,
-  of,
   pipe,
   scan,
   switchMap,
@@ -30,9 +28,7 @@ export const arrayOperatorFactory = <T, R>(
 ): OperatorFunction<T[], R> => {
   return (source$) => {
     return source$.pipe(
-      switchMap((arr) =>
-        of(arr).pipe(concatMap((items) => from(items).pipe(operator)))
-      )
+      switchMap((arr) => from(arr).pipe(operator))
     );
   };
 };
