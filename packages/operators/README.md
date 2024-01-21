@@ -36,6 +36,14 @@ npm install rxjs @hao-rxtool/operators
   * [findIndex](#arrayfindindex)
   * [every](#arrayevery)
   * [some](#arraysome)
+* [Map](#map)
+  * [get](#mapget)
+  * [set](#mapset)
+  * [delete](#mapdelete)
+  * [has](#maphas)
+  * [keys](#mapkeys)
+  * [values](#mapvalues)
+  * [entries](#mapentries)
 * [Math](#math)
   * [abs](#mathabs)
   * [ceil](#mathceil)
@@ -321,6 +329,126 @@ const input = [1, 2, 3, 4, 5];
 
 of(input).pipe(arraySome((num) => num > 3)).subscribe((value) => {
   console.log(value); // Output: true
+});
+```
+
+### Map
+
+#### mapGet
+
+Gets the value associated with the specified key in a Map.
+
+```typescript
+import { of } from 'rxjs';
+import { mapGet } from '@hao-rxtool/operators';
+
+const key = 'test';
+const map = new Map<string, number>([[key, 42]]);
+
+of(map).pipe(mapGet(key)).subscribe((value) => {
+  console.log(value); // Output: 42
+});
+```
+
+#### mapSet
+
+Sets the specified key-value pair in a Map.
+
+```typescript
+import { of } from 'rxjs';
+import { mapSet } from '@hao-rxtool/operators';
+
+const key = 'test';
+const map = new Map<string, number>();
+
+of(map).pipe(mapSet(key, 42)).subscribe((value) => {
+  console.log(value); // Output: 42
+});
+```
+
+#### mapDelete
+
+Deletes the specific value from a Map.
+
+```typescript
+import { of } from 'rxjs';
+import { mapDelete } from '@hao-rxtool/operators';
+
+const key = 'test';
+const map = new Map<string, number>([[key, 42]]);
+
+of(map).pipe(mapDelete(key)).subscribe((value) => {
+  console.log(value.get(test)); // Output: undefined
+});
+```
+
+#### mapHas
+
+Checks if a Map contains the specified key.
+
+```typescript
+import { of } from 'rxjs';
+import { mapHas } from '@hao-rxtool/operators';
+
+const key = 'test';
+const map = new Map<string, number>([[key, 42]]);
+
+of(map).pipe(mapHas(key)).subscribe((value) => {
+  console.log(value); // Output: true
+});
+```
+
+#### mapKeys
+
+Retrieves an array of keys from a Map.
+
+```typescript
+import { of } from 'rxjs';
+import { mapKeys } from '@hao-rxtool/operators';
+
+const map = new Map<string, number>([
+  ['key1', 1],
+  ['key2', 2],
+]);
+
+of(map).pipe(mapKeys()).subscribe((value) => {
+  console.log(value); // Output: ['key1', 'key2']
+});
+```
+
+#### mapValues
+
+Retrieves an array of values from a Map.
+
+```typescript
+import { of } from 'rxjs';
+import { mapValues } from '@hao-rxtool/operators';
+
+const map = new Map<string, number>([
+  ['key1', 1],
+  ['key2', 2],
+]);
+
+of(map).pipe(mapValues()).subscribe((value) => {
+  console.log(value); // Output: [1, 2]
+});
+```
+
+#### mapEntries
+
+Retrieves an array of key-value pairs from a Map.
+
+```typescript
+import { of } from 'rxjs';
+import { mapEntries } from '@hao-rxtool/operators';
+
+const map = new Map<string, number>([
+  ['key1', 1],
+  ['key2', 2],
+]);
+
+of(map).pipe(mapEntries()).subscribe((value) => {
+  console.log(value); // Output: [['key1', 1], ['key2', 2]]
 });
 ```
 
