@@ -6,6 +6,7 @@
 
 ## Packages
 
+* [Operators](./packages/operators)
 * Data Structure
   - [Queue](./packages/queue)
 

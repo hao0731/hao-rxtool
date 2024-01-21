@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@hao-rxtool/operators": ["packages/operators/src/index.ts"],
       "@hao-rxtool/queue": ["packages/queue/src/index.ts"]
     }
   },

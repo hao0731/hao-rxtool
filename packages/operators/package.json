@@ -1,7 +1,7 @@
 {
-  "name": "@hao-rxtool/queue",
+  "name": "@hao-rxtool/operators",
   "version": "1.0.0-beta.1",
-  "description": "A powerful RxJS-based queue and queue manager for efficient and asynchronous task processing.",
+  "description": "A powerful RxJS utility operators library",
   "license": "MIT",
   "author": "HAO <ss501801@gmail.com>",
   "contributors": [
@@ -15,7 +15,7 @@
     "Stream",
     "Observable",
     "Observables",
-    "Queue"
+    "operators"
   ],
   "homepage": "https://github.com/hao0731/hao-rxtool",
   "bugs": {
@@ -24,7 +24,7 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/hao0731/hao-rxtool.git",
-    "directory": "packages/queue"
+    "directory": "packages/operators"
   },
   "dependencies": {},
   "type": "commonjs",
