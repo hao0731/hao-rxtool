@@ -1,6 +1,6 @@
 {
   "name": "@hao-rxtool/queue",
-  "version": "1.0.0",
+  "version": "1.0.0-beta.1",
   "description": "A powerful RxJS-based queue and queue manager for efficient and asynchronous task processing.",
   "license": "MIT",
   "author": "HAO <ss501801@gmail.com>",
