@@ -1,0 +1,33 @@
+{
+  "name": "@hao-rxtool/operators",
+  "version": "1.0.0",
+  "description": "A powerful RxJS utility operators library",
+  "license": "MIT",
+  "author": "HAO <ss501801@gmail.com>",
+  "contributors": [
+    {
+      "name": "HAO",
+      "email": "ss501801@gmail.com"
+    }
+  ],
+  "keywords": [
+    "RxJS",
+    "Stream",
+    "Observable",
+    "Observables",
+    "operators"
+  ],
+  "homepage": "https://github.com/hao0731/hao-rxtool",
+  "bugs": {
+    "url": "https://github.com/hao0731/hao-rxtool/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hao0731/hao-rxtool.git",
+    "directory": "packages/operators"
+  },
+  "dependencies": {},
+  "type": "commonjs",
+  "main": "./index.cjs",
+  "module": "./index.js"
+}
